@@ -66,6 +66,8 @@ fn start_background_worker(receiver: Receiver<LogEvent>) {
                 event.traceback.dimmed()
             );
 
+            println!("{}", console_output);
+
             let file_output = format!(
                 "[{}] {} [metrics: {}] [req_id: {}] Func: {} | Err: {}\n",
                 time_str, config.log_name, metrics, event.request_id, event.func_name, event.error_msg
