@@ -1,4 +1,4 @@
----
+
 
 # 🦀 PyLogRust
 
@@ -6,7 +6,6 @@
 
 `PyLogRust` is a Python extension that offloads logging operations to a background Rust thread. It ensures your Python application remains lightning-fast even when logging heavy traceback data or writing to slow disk I/O.
 
----
 
 ## ⚡ Why PyLogRust? (The Problems We Solve)
 
