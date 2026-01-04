@@ -44,6 +44,13 @@ Standard Python logging can become a bottleneck in high-throughput production en
 ---
 
 ## 🛠️ Installation
+**You can install by **
+```bash
+pip install pylogrust
+```
+
+OR
+
 
 **Prerequisites:** You need `Rust` (cargo) and `Python` installed.
 
@@ -71,9 +78,9 @@ maturin develop
 
 You must initialize the Rust core once at the start of your application.
 
-'''
+```bash
 pip install pylogrust
-'''
+```
 
 ```python
 import pylogrust
@@ -132,33 +139,6 @@ def process_data():
 
 ```
 
----
-
-## 🏗️ Architecture
-
-```mermaid
-graph LR
-    subgraph Python ["Python Main Thread"]
-        UserCode[User Function] --> Decorator[@debug Decorator]
-        Decorator -->|1. Capture Error & Context| PyO3[Rust Binding]
-    end
-
-    subgraph Rust ["Rust Core (Background)"]
-        PyO3 -->|2. Send (Non-blocking)| Channel((Memory Channel))
-        Channel -->|3. Async Receive| Worker[Background Worker]
-        
-        Worker -->|4. Check Throttling| Filter{Is Duplicate?}
-        
-        Filter -- No --> Sys[Fetch CPU/Mem Metrics]
-        Sys --> Console[Colored Console Output]
-        Sys --> File[File System I/O]
-        
-        Filter -- Yes --> Drop[Discard Log]
-    end
-
-```
-
----
 
 ## ⚙️ Configuration Options
 
